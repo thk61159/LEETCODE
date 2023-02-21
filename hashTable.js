@@ -45,3 +45,44 @@ var twoSum = function (nums, target) {
 
 // twoSum([1, 5, 11, 15, 16, 18, 20, 2, 7], 9)
 
+//290. Word Pattern
+var wordPattern = function (pattern, s) {
+	let hashTable = {}
+	let setTable = new Set()
+	s = s.split(' ')
+	if (pattern.length !== s.length) return false
+	for (let i = 0; i < pattern.length; i++) {
+		if (!hashTable[pattern[i]] && !setTable.has(s[i])) {
+			hashTable[pattern[i]] = s[i]
+			setTable.add(s[i])
+		} else if (hashTable[pattern[i]] !== s[i]) {
+			return false
+		}
+		// console.log(hashTable, setTable)
+	}
+	return true
+}
+/* // 'constructor' can not used as key so this method can not use
+var wordPattern = function (pattern, s) {
+	let hashTable = {}
+	let setTable = {}
+	s = s.split(' ')
+	if (pattern.length !== s.length) return false
+	for (let i = 0; i < pattern.length; i++) {
+		if (!hashTable[pattern[i]] && setTable[s[i]] === undefined) {
+			hashTable[pattern[i]] = s[i]
+			setTable[s[i]] = i
+		} else if (hashTable[pattern[i]] !== s[i]) {
+			return false
+		}
+		console.log(hashTable, setTable)
+	}
+	return true
+}*/
+console.log(wordPattern('abba', 'dog dog dog dog'))
+console.log(wordPattern('abba', 'dog constructor constructor dog'))
+console.log(wordPattern('abba', 'dog cat cat dog'))
+console.log(wordPattern('abc', 'c b a'))
+console.log(wordPattern('abc', 'c b c'))
+
+// 383. Ransom Note
