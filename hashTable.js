@@ -29,7 +29,8 @@ function TwoSum0001() {
 
 	twoSum([1, 5, 11, 15, 16, 18, 20, 2, 7], 9)
 }
-TwoSum0001()
+// TwoSum0001()
+//==================================================//
 //290. Word Pattern
 function WordPattern0290() {
 	//O(n) 66,86
@@ -45,7 +46,7 @@ function WordPattern0290() {
 			} else if (hashTable[pattern[i]] !== s[i]) {
 				return false
 			}
-			// console.log(hashTable, setTable)
+			console.log(hashTable, setTable)
 		}
 		return true
 	}
@@ -97,7 +98,8 @@ var wordPattern = function (pattern, s) {
 	console.log(wordPattern('abc', 'c b a'))
 	console.log(wordPattern('abc', 'c b c'))
 }
-WordPattern0290()
+// WordPattern0290()
+//==================================================//
 // 383. Ransom Note
 function RansomNote0383() {
 	//O(n) 43,45
@@ -182,17 +184,111 @@ function RansomNote0383() {
 		return true
 	}
 }
-RansomNote0383()
-
+// RansomNote0383()
+//==================================================//
 //268. Missing Number
-function MissingNumber() {}
-
+function MissingNumber() {
+	//O(n) 91,35
+	var missingNumber = function (nums) {
+		let missingNum = 0
+		nums.push(0)
+		for (let i = 0; i < nums.length; i++) {
+			missingNum += i - nums[i]
+			console.log(i, nums[i], missingNum)
+		}
+		return missingNum
+	}
+	//O(n) 99,75 與使用push比差很多
+	var missingNumber2 = function (nums) {
+		let missingNum = 0
+		nums[nums.length] = 0
+		for (let i = 0; i < nums.length; i++) {
+			missingNum += i - nums[i]
+			console.log(i, nums[i], missingNum)
+		}
+		return missingNum
+	}
+	console.log(missingNumber([3, 0, 1]))
+}
+// MissingNumber()
+//==================================================//
 //409. Longest Palindrome
-function LongestPalindrome() {}
-
+function LongestPalindrome() {
+	//O(n) 86, 56
+	var longestPalindrome = function (s) {
+		let hashTable = {}
+		let oddExist = false
+		let len = 0
+		for (let i = 0; i < s.length; i++) {
+			if (hashTable[s[i]]) {
+				hashTable[s[i]] += 1
+			} else {
+				hashTable[s[i]] = 1
+			}
+		}
+		console.log(hashTable)
+		for (let key in hashTable) {
+			if (!oddExist && hashTable[key] % 2) {
+				oddExist = true
+			}
+			len += Math.floor(hashTable[key] / 2) * 2
+		}
+		return oddExist ? len + 1 : len
+	}
+	//O(n) 97, 22
+	var longestPalindrome2 = function (s) {
+		let oddset = new Set()
+		let len = 0
+		for (let i = 0; i < s.length; i++) {
+			if (oddset.has(s[i])) {
+				len += 2
+				oddset.delete(s[i])
+			} else {
+				oddset.add(s[i])
+			}
+		}
+		return oddset.size ? len + 1 : len
+	}
+	console.log(
+		longestPalindrome2(
+			'civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth'
+		)
+	)
+}
+// LongestPalindrome()
+//==================================================//
 //349. Intersection of Two Arrays
-function IntersectionTwoArrays() {}
-
+function IntersectionTwoArrays() {
+	//O(n) 95,16
+	var intersection = function (nums1, nums2) {
+		let hashTable = {}
+		let intersection = new Set()
+		for (let i = 0; i < nums1.length; i++) {
+			if (!hashTable[nums1[i]]) {
+				hashTable[nums1[i]] = 1
+			}
+		}
+		for (let i = 0; i < nums2.length; i++) {
+			if (hashTable[nums2[i]]) {
+				intersection.add(nums2[i])
+			}
+		}
+		return [...intersection]
+	}
+	//O(n) 80,96
+	var intersection2 = function (nums1, nums2) {
+		let intersection = []
+		nums1.map(e => {
+			if (nums2.includes(e) && !intersection.includes(e)) {
+				intersection.push(e)
+			}
+		})
+		return intersection
+	}
+	console.log(intersection2([4, 9, 5], [9, 4, 9, 8, 4]))
+}
+// IntersectionTwoArrays()
+//==================================================//
 //1512. Number of Good Pairs
 function NumberGoodPairs() {
 	//O(n) 23,30
