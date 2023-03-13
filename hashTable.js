@@ -32,11 +32,12 @@ function TwoSum0001() {
 // TwoSum0001()
 //==================================================//
 //290. Word Pattern
+
 function WordPattern0290() {
 	//O(n) 66,86
 	var wordPattern = function (pattern, s) {
-		let hashTable = {}
-		let setTable = new Set()
+		let hashTable = {} 
+		let setTable = new Set([1,1,1,])//Set{1}
 		s = s.split(' ')
 		if (pattern.length !== s.length) return false
 		for (let i = 0; i < pattern.length; i++) {
@@ -187,7 +188,7 @@ function RansomNote0383() {
 // RansomNote0383()
 //==================================================//
 //268. Missing Number
-function MissingNumber() {
+function MissingNumber0268() {
 	//O(n) 91,35
 	var missingNumber = function (nums) {
 		let missingNum = 0
@@ -213,7 +214,7 @@ function MissingNumber() {
 // MissingNumber()
 //==================================================//
 //409. Longest Palindrome
-function LongestPalindrome() {
+function LongestPalindrome0409() {
 	//O(n) 86, 56
 	var longestPalindrome = function (s) {
 		let hashTable = {}
@@ -258,7 +259,7 @@ function LongestPalindrome() {
 // LongestPalindrome()
 //==================================================//
 //349. Intersection of Two Arrays
-function IntersectionTwoArrays() {
+function IntersectionTwoArrays0349() {
 	//O(n) 95,16
 	var intersection = function (nums1, nums2) {
 		let hashTable = {}
@@ -275,9 +276,10 @@ function IntersectionTwoArrays() {
 		}
 		return [...intersection]
 	}
-	//O(n) 80,96
+	//O(n^2) 80,96
 	var intersection2 = function (nums1, nums2) {
 		let intersection = []
+		//array.map O(n) array.includes O(n)
 		nums1.map(e => {
 			if (nums2.includes(e) && !intersection.includes(e)) {
 				intersection.push(e)
@@ -290,7 +292,7 @@ function IntersectionTwoArrays() {
 // IntersectionTwoArrays()
 //==================================================//
 //1512. Number of Good Pairs
-function NumberGoodPairs() {
+function NumberGoodPairs1512() {
 	//O(n) 23,30
 	var numIdenticalPairs = function (nums) {
 		//1個數->0
@@ -300,6 +302,15 @@ function NumberGoodPairs() {
 		//5個數->6+4
 		//10個數->9+8+7+6+5+4+3+2+1
 		//n個數->1到n-1連加= n*(n-1)/2
+		function countPairs2(number) {
+			let count = 0
+			for (let i = 0; i < number; i++){
+				for (let j = i + 1; j < number; j++) {
+					count++
+				}
+			}
+			return count
+		}
 		function countPairs(number) {
 			if (number <= 1) return 0
 			return (number * (number - 1)) / 2
@@ -318,10 +329,73 @@ function NumberGoodPairs() {
 		}
 		return pairs
 	}
+	//O(n) 95,31
+	var numIdenticalPairs2 = function (nums) {
+		//1個數->0
+		//2個數->1
+		//3個數->3
+		//4個數->6
+		//5個數->6+4
+		//10個數->9+8+7+6+5+4+3+2+1
+		//n個數->1到n-1連加= n*(n-1)/2
+		let pairs = 0
+		let hashTable = {}
+		for (let i = 0; i < nums.length; i++) {
+			if (hashTable[nums[i]]) {
+				//n>1 ->配對數->前一項 + (n-1)
+				pairs += hashTable[nums[i]]
+				hashTable[nums[i]] += 1
+			} else {
+				hashTable[nums[i]] = 1
+			}
+		}
+		return pairs
+	}
 }
 
 //3. Longest Substring Without Repeating Characters
-function LongestSubstring() {}
+function LongestSubstring0003() {}
 
 //17. Letter Combinations of a Phone Number
-function LetterCombinations() {}
+function LetterCombinations0017() {
+	const table = {
+		2: ['a', 'b', 'c'],
+		3: ['d', 'e', 'f'],
+		4: ['g', 'h', 'i'],
+		5: ['j', 'k', 'l'],
+		6: ['m', 'n', 'o'],
+		7: ['p', 'q', 'r', 's'],
+		8: ['t', 'u', 'v'],
+		9: ['w', 'x', 'y', 'z'],
+	}
+	var letterCombinations = function (digits) {
+		let arr = []
+		function recursion(arr,n) {
+			if (n<=1) {
+				
+				return table[digits][0]
+			}
+			for(let i = 0;i<1000;i++){}
+			recursion()
+		}
+	}
+	letterCombinations('23')
+}
+// LetterCombinations()
+
+// 217. Contains Duplicate
+function ContainsDuplicate0217() {
+	//O(n) 91,61
+	var containsDuplicate = function (nums) {
+		let map = {}
+		for (let i = 0; i < nums.length; i++){
+			map[nums[i]] = (map[nums[i]] ?? 0) + 1
+			if (map[nums[i]]>1) return true
+		}
+		return false
+	}
+	console.log(containsDuplicate([1, 2, 3, 1]))
+	console.log(containsDuplicate([1, 2, 3, 4]))
+	console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]))
+}
+ContainsDuplicate0217()
