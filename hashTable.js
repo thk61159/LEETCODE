@@ -398,4 +398,25 @@ function ContainsDuplicate0217() {
 	console.log(containsDuplicate([1, 2, 3, 4]))
 	console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]))
 }
-ContainsDuplicate0217()
+// ContainsDuplicate0217()
+
+//242. Valid Anagram
+function ValidAnagram0242() {
+	//O(n) 87, 85
+	var isAnagram = function (s, t) {
+		if (s.length !== t.length) return false
+		let map = {}
+		for (let i = 0; i < s.length; i++){
+			map[s[i]] = (map[s[i]] ?? 0) + 1
+			map[t[i]] = (map[t[i]] ?? 0) - 1
+			console.log(map)
+		}
+		for (let key in map) {
+			if (map[key] !== 0) return false
+		}
+		return true
+	}
+	isAnagram('anagram', 'nagaram')
+}
+ValidAnagram0242()
+
