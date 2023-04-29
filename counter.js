@@ -152,3 +152,16 @@ function DeckofCards0914() {
 	)
 }
 // DeckofCards0914()
+
+// 169. Majority Element
+function MajorityElement0169() {
+	//O(n) 68,82
+	var majorityElement = function (nums) {
+		let n = nums.length / 2
+		let map = {}
+		for (let i = 0; i < nums.length; i++) {
+			map[nums[i]] = (map[nums[i]] ?? 0) + 1
+			if (map[nums[i]]>n) return nums[i]
+		}
+	}
+}
