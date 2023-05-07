@@ -44,7 +44,7 @@ RemoveDuplicates0026()
 
 // 28. Find the Index of the First Occurrence in a String
 
-function findstrStr() {
+function findstrStr0028() {
 	/**
 	 * @param {string} haystack
 	 * @param {string} needle
@@ -70,9 +70,13 @@ function findstrStr() {
   // console.log(strStr('leetcode', 'leeto'))
   console.log(strStr('mississippi', 'issip'))
 }
-findstrStr()
 // 1346. Check If N and Its Double Exist
-function checkIfExist() {
+/**
+ * 講這題
+ * 講這題
+ * 講這題
+ */
+function checkIfExist1346() {
 	/**
 	 * @param {number[]} arr
 	 * @return {boolean}
@@ -139,3 +143,66 @@ function checkIfExist() {
 		return false
 	}
 }
+
+// 88. Merge Sorted Array
+function MergeSortedArray0088() {
+  var merge = function (nums1, m, nums2, n) {
+		let pointer1 = 0
+		let pointer2 = 0
+		let temp = [...nums1]
+		while (pointer1 < m && pointer2 < n) {
+			if (temp[pointer1] > nums2[pointer2]) {
+				nums1[pointer1 + pointer2] = nums2[pointer2]
+				pointer2++
+			} else {
+				nums1[pointer1 + pointer2] = temp[pointer1]
+				pointer1++
+			}
+		}
+		if (pointer1 < m) {
+			while (pointer1 < m) {
+				nums1[pointer1 + pointer2] = temp[pointer1]
+				pointer1++
+			}
+		}
+		if (pointer2 < n) {
+			while (pointer2 < n) {
+				nums1[pointer1 + pointer2] = nums2[pointer2]
+				pointer2++
+			}
+		}
+		return nums1
+	}
+  console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6],3))
+}
+MergeSortedArray0088()
+
+// 202. Happy Number
+function HappyNumber0202() {
+  
+  var isHappy = function (n) {
+    let set = new Set()
+    function x(n) {
+      if (n === 1) return true
+			if (set.has(n)) return false
+			set.add(n)
+
+			let result = 0
+			function count(n) {
+				result += (n % 10) ** 2
+				if (n < 10) return result
+				return count(Math.floor(n / 10))
+			}
+			n = count(n)
+
+			return x(n)
+    }
+    return x(n)
+  }
+  
+  for (let i = 1; i < 10; i++){
+   console.log(isHappy(i),i)
+  }
+  
+}
+HappyNumber0202()
